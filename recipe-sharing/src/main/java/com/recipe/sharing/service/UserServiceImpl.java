@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void deleteUser(Long id) {
+	public void deleteUser(Long id) throws IllegalArgumentException{
 		userRepository.deleteById(id);
 	}
 
