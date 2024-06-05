@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recipe.sharing.exception.UserExistsException;
 import com.recipe.sharing.model.User;
 import com.recipe.sharing.service.UserService;
 
@@ -18,7 +19,8 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/users")
-	public User createUser(@RequestBody User user) {
+	public User createUser(@RequestBody User user) throws UserExistsException {
 		return userService.createUser(user);
 	}
+
 }
