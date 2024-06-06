@@ -11,4 +11,5 @@ public interface UserService {
 	public void deleteUser(Long id);
 	public List<User> getAllUsers();
 	public User findUserById(Long userId);
+	public User findUserByJwt(String jwt) throws Exception;
 }

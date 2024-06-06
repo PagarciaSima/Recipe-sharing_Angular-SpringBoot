@@ -1,3 +1,4 @@
+
 package com.recipe.sharing.exception;
 
 import java.time.LocalDateTime;

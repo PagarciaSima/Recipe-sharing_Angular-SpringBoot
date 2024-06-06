@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,9 +27,9 @@ public class RecipeController {
 	private RecipeService recipeService;
 	private UserService userService;
 	
-	@PostMapping("/recipes/user/{userId}")
-	public Recipe createRecipe(@PathVariable Long userId, @RequestBody Recipe recipe) {
-		User user = userService.findUserById(userId);
+	@PostMapping("/recipes")
+	public Recipe createRecipe(@RequestHeader("Authorization") String jwt, @RequestBody Recipe recipe) throws Exception {
+		User user = userService.findUserByJwt(jwt);
 		Recipe createdRecipe = recipeService.createRecipe(recipe, user);
 		return createdRecipe;
 	}
@@ -54,9 +55,9 @@ public class RecipeController {
 		return recipeService.updateRecipe(recipe, recipeId);
 	}
 	
-	@PutMapping("/recipes/{recipeId}/user/{userId}")
-	public Recipe likeRecipe(@PathVariable Long recipeId, @PathVariable Long userId) {
-		User user = userService.findUserById(userId);
+	@PutMapping("/recipes/{recipeId}/like")
+	public Recipe likeRecipe(@PathVariable Long recipeId, @RequestHeader("Authorization") String jwt) throws Exception {
+		User user = userService.findUserByJwt(jwt);
 		return recipeService.likeRecipe(recipeId, user);
 	}
 	

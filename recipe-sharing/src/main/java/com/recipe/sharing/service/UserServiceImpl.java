@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.recipe.sharing.config.JwtProvider;
 import com.recipe.sharing.exception.UserException;
 import com.recipe.sharing.model.User;
 import com.recipe.sharing.repository.UserRepository;
@@ -16,6 +17,7 @@ import lombok.AllArgsConstructor;
 public class UserServiceImpl implements UserService{
 	
 	private UserRepository userRepository;	
+	private JwtProvider jwtProvider;
 	
 	@Override
 	public User createUser(User user) throws UserException {
@@ -54,5 +56,18 @@ public class UserServiceImpl implements UserService{
 		oldUser.setEmail(user.getEmail());
 		oldUser.setFullName(user.getFullName());
 		return userRepository.save(oldUser);
+	}
+
+	@Override
+	public User findUserByJwt(String jwt) throws Exception {
+		String email = jwtProvider.getEmailFromJwtToken(jwt);
+		if(email == null) {
+			throw new Exception("Provide a valid jwt token");
+		}
+		User user = userRepository.findByEmail(email);
+		if(user == null) {
+			throw new UserException("User with email " + email + " not found");
+		}
+		return user;
 	}
 }
