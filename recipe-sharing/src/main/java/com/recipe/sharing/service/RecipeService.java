@@ -8,9 +8,9 @@ import com.recipe.sharing.model.User;
 public interface RecipeService {
 	
 	public Recipe createRecipe(Recipe recipe, User user);
-	public Recipe findRecipeById(Long id) throws Exception;
-	public void deleteRecipe(Long id) throws Exception;
-	public Recipe updateRecipe(Recipe recipe, Long Id) throws Exception;
+	public Recipe findRecipeById(Long id);
+	public void deleteRecipe(Long id);
+	public Recipe updateRecipe(Recipe recipe, Long Id);
 	public List<Recipe> findAllRecipe();
-	public Recipe likeRecipe(Long recipeId, User user) throws Exception;
+	public Recipe likeRecipe(Long recipeId, User user);
 }

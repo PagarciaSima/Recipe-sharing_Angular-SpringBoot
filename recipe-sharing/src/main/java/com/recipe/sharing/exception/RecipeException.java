@@ -1,13 +1,13 @@
 package com.recipe.sharing.exception;
 
-public class UserExistsException extends RuntimeException{
+public class RecipeException extends RuntimeException{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public UserExistsException (String message) {
+	public RecipeException (String message) {
 		super( message);
 	}
 }
