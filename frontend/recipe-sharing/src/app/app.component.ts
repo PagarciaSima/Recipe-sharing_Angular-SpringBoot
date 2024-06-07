@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { FooterComponent } from './pages/footer/footer.component';
     RouterOutlet, 
     CommonModule,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    HomePageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
