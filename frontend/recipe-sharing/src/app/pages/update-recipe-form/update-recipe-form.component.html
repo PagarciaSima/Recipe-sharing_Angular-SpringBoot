@@ -1,9 +1,9 @@
-<h2 class="text-center pt-5">Create Recipe</h2>
+<h2 class="text-center pt-5">Update Recipe: 3</h2>
 <form (ngSubmit)="onSubmit()" class="w-[27rem] p-6 rounded-lg shadow-md">
     <div class="mb-4">
         <mat-form-field class="w-full">
             <mat-label class="text-gray-200">Title</mat-label>
-            <input matInput placeholder="Title" value="" name="title" [(ngModel)]="recipeItem.title" 
+            <input matInput placeholder="Title" value="recipeItem.title" name="title" [(ngModel)]="recipeItem.title" 
                 class="py-2 px-3 text-gray-200 mt-1 focus:shadow-outline"
             >
         </mat-form-field>
@@ -12,7 +12,7 @@
     <div class="mb-4">
         <mat-form-field class="w-full">
             <mat-label class="text-gray-200">Description</mat-label>
-            <input matInput placeholder="Description" value="" name="description" [(ngModel)]="recipeItem.description" 
+            <input matInput placeholder="Description" value="recipeItem.description" name="description" [(ngModel)]="recipeItem.description" 
                 class="py-2 px-3 text-gray-200 mt-1 focus:shadow-outline"
             >
         </mat-form-field>
@@ -21,14 +21,14 @@
     <div class="mb-4">
         <mat-form-field class="w-full">
             <mat-label class="text-gray-200">Image</mat-label>
-            <input matInput placeholder="Image url" value="" name="image" [(ngModel)]="recipeItem.image" 
+            <input matInput placeholder="Image url" value="recipeItem.image" name="image" [(ngModel)]="recipeItem.image" 
                 class="py-2 px-3 text-gray-200 mt-1 focus:shadow-outline"
             >
         </mat-form-field>
     </div>
 
     <div class="mb-4">
-        <mat-radio-group name="foodType" [(ngModel)]="recipeItem.foodType" aria-label="Select an option">
+        <mat-radio-group name="foodType" value="recipeItem.foodType" [(ngModel)]="recipeItem.foodType" aria-label="Select an option">
             <mat-radio-button value="veg">Vegetarian</mat-radio-button>
             <mat-radio-button value="non_veg">Non vegetarian</mat-radio-button>
         </mat-radio-group>           
