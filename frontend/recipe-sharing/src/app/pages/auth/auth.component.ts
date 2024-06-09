@@ -4,6 +4,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthServiceService } from '../../services/auth/auth-service.service';
 
 @Component({
   selector: 'app-auth',
@@ -14,6 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AuthComponent {
   isRegister = false;
+
+  constructor(public authService: AuthServiceService){
+    
+  }
 
   registrationForm = new FormGroup({
     fullName: new FormControl("", [Validators.required]),
@@ -27,14 +32,29 @@ export class AuthComponent {
   });
 
   handleRegister(){
-    console.log("Registration ", this.registrationForm.value)
+    console.log("Registration ", this.registrationForm.value);
+    this.authService.register(this.registrationForm.value).subscribe({
+      next:(response)=>{
+        localStorage.setItem("jwt", response.jwt);
+        this.authService.getUserProfile().subscribe();
+        console.log("Registration success", response);
+      }
+    });
   }
 
   handleLogin(){
-    console.log("Login ", this.loginForm.value)
+    console.log("Login ", this.loginForm.value);
+    this.authService.login(this.loginForm.value).subscribe({
+      next:(response)=>{
+        localStorage.setItem("jwt", response.jwt);
+        this.authService.getUserProfile().subscribe();
+        console.log("login success", response);
+      }
+    });
   }
 
   togglePanel(){
     this.isRegister = !this.isRegister;
+    
   }
 }

@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthServiceService {
 
-  private baseUrl: string = 'http://localhost:5454/';
+  private baseUrl: string = 'http://localhost:5454';
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +29,7 @@ export class AuthServiceService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem("jwt")}`
     })
-    return this.http.post<any>(`${this.baseUrl}/api/auth/signup`, {headers}).pipe(
+    return this.http.get<any>(`${this.baseUrl}/api/v1/user/profile`, {headers}).pipe(
       tap((user)=> {
         const currentState = this.authSubject.value;
         this.authSubject.next({...currentState, user})

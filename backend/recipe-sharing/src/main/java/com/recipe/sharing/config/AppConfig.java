@@ -2,7 +2,7 @@ package com.recipe.sharing.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-import java.util.Collections;
+import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ public class AppConfig {
         http.sessionManagement(
                 management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
-                        authorize -> authorize.requestMatchers("/api/**").authenticated()
+                        authorize -> authorize.requestMatchers("/api/v1/**").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
@@ -36,17 +36,19 @@ public class AppConfig {
 		return http.build();
 	}
 
-
-	private CorsConfigurationSource corsConfigurationSource() {
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
 		return new CorsConfigurationSource() {
 			
 			@Override
 			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
 				CorsConfiguration cfg = new CorsConfiguration();
-				cfg.setAllowedOrigins(Collections.singletonList("*"));
-				cfg.setAllowedMethods(Collections.singletonList("*"));
-				cfg.setExposedHeaders(Collections.singletonList("*"));
-				cfg.setMaxAge(3600L);
+				cfg.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+				cfg.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+				cfg.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+				cfg.setExposedHeaders(Arrays.asList("Authorization"));
+				cfg.setAllowCredentials(true);
+				cfg.setMaxAge(3600L);;
 				return cfg;
 			}
 		};

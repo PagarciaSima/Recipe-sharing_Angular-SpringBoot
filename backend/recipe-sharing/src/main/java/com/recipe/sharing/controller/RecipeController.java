@@ -22,6 +22,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("api/v1")
+
 public class RecipeController {
 	
 	private RecipeService recipeService;

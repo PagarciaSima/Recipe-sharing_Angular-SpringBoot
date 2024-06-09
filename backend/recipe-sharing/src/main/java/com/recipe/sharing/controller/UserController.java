@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("api/v1")
+
 public class UserController {
 	
 	private UserService userService;
