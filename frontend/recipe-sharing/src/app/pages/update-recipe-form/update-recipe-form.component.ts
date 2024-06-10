@@ -32,10 +32,10 @@ export class UpdateRecipeFormComponent {
   }
 
   onSubmit() {
-    this.recipeService.updateRecipes(this.recipe.id).subscribe({
-      next: data => console.log("Updated ", data),
-      error:error => console.log("error ", error)
-    });
+    this.recipeService.updateRecipes(this.recipe.id).subscribe();
+    window.location.reload(); 
+
+    
 
   }
 
