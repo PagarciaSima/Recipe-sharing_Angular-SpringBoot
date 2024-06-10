@@ -30,7 +30,7 @@ public class Recipe {
 	private User user;
 	@Column(nullable = false)
 	private String image;
-	@Column(nullable = false)
+	@Column(nullable = false, length = 255)
 	private String description;
 	@Column(nullable = false)
 	private boolean vegetarian;

@@ -4,6 +4,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {MatRadioModule} from '@angular/material/radio';
+import { RecipeServiceService } from '../../services/recipe/recipe-service.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,9 +22,21 @@ export class CreateRecipeFormComponent {
     description: "",
     foodType: "",
     image: ""
+  };
+
+  constructor(private reciperService: RecipeServiceService, private router: Router){
+ 
   }
 
   onSubmit() {
-    console.log("values ", this.recipeItem)
+    console.log("values ", this.recipeItem);
+    this.reciperService.createRecipes(this.recipeItem).subscribe({
+      next: data => {
+        console.log("Created recipe ", data);
+        window.location.reload(); 
+      },
+      error: error => console.log("Error ", error)
+    });
+
   }
 }

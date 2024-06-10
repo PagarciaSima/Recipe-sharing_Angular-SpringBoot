@@ -1,6 +1,6 @@
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 
@@ -26,6 +26,12 @@ export class AuthServiceService {
   }
 
   getUserProfile(): Observable<any>{
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      // Handle the case where there is no token
+      return throwError(() => new Error('No token found')); 
+    }
+
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem("jwt")}`
     })
@@ -41,6 +47,5 @@ export class AuthServiceService {
     localStorage.clear();
     this.authSubject.next({});
   }
-
 
 }

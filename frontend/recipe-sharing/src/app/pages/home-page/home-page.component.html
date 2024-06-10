@@ -1,7 +1,7 @@
 <div class="pb-5">
     <div class="flex justify-center flex-wrap gap-5">
         @for(item of recipes; track item){
-            <app-recipe-card/>
+            <app-recipe-card [recipe]="item"/>
         }@empty {
             <div>
                 There are not any created recipes

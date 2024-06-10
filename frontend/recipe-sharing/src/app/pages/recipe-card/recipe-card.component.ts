@@ -4,6 +4,8 @@ import {MatCardModule} from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import { UpdateRecipeFormComponent } from '../update-recipe-form/update-recipe-form.component';
+import { Input } from '@angular/core';
+import { RecipeServiceService } from '../../services/recipe/recipe-service.service';
 
 @Component({
   selector: 'app-recipe-card',
@@ -14,11 +16,20 @@ import { UpdateRecipeFormComponent } from '../update-recipe-form/update-recipe-f
 })
 export class RecipeCardComponent {
 
-  constructor(public dialog: MatDialog){
+  // Getting recipe from father home page
+  @Input() recipe: any;
+
+  constructor(public dialog: MatDialog, private recipeService: RecipeServiceService){
 
   }
 
   handleOpenEditRecipeForm() {
     this.dialog.open(UpdateRecipeFormComponent);
+  }
+
+  handleDeleteRecipe(){
+    this.recipeService.deleteRecipe(this.recipe.id).subscribe();
+    window.location.reload(); 
+
   }
 }

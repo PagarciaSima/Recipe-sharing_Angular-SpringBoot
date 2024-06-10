@@ -14,8 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-
-import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class AppConfig {
@@ -36,23 +35,20 @@ public class AppConfig {
 		return http.build();
 	}
 
-	@Bean
-	public CorsConfigurationSource corsConfigurationSource() {
-		return new CorsConfigurationSource() {
-			
-			@Override
-			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-				CorsConfiguration cfg = new CorsConfiguration();
-				cfg.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-				cfg.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-				cfg.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-				cfg.setExposedHeaders(Arrays.asList("Authorization"));
-				cfg.setAllowCredentials(true);
-				cfg.setMaxAge(3600L);;
-				return cfg;
-			}
-		};
-	}
+	  @Bean
+	    public CorsConfigurationSource corsConfigurationSource() {
+	        CorsConfiguration configuration = new CorsConfiguration();
+	        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+	        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+	        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+	        configuration.setExposedHeaders(Arrays.asList("Authorization"));
+	        configuration.setAllowCredentials(true);
+	        configuration.setMaxAge(3600L);
+	        
+	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        source.registerCorsConfiguration("/**", configuration);
+	        return source;
+	    }
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {

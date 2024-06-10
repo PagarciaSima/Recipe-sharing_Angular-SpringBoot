@@ -7,7 +7,10 @@ body {
     background: hsl(0, 0%, 29%);
     color: white;
 }
+p {
+    overflow-wrap: break-word
 
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

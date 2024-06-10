@@ -10,9 +10,12 @@
       <div>
         <span class="example-spacer"></span>
 
-        <button mat-button>
-          {{user.fullName}}
-        </button>
+        @if (user) {
+          <button mat-button (click)="handleLogOut()">
+            {{ user.fullName}}
+          </button>
+        }
+        
       </div>
       
     </mat-toolbar>
