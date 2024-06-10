@@ -60,15 +60,13 @@ export class RecipeServiceService {
     );
   }
 
-  deleteRecipe(id: any): Observable<any>{
+  deleteRecipe(id: any): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.delete(`${this.baseUrl}/api/v1/recipes/${id}`, {headers}).pipe(
-
-      tap((deletedRecipe: any)=>{
+    return this.http.delete(`${this.baseUrl}/api/v1/recipes/${id}`, { headers }).pipe(
+      tap((deletedRecipe: any) => {
         const currentState = this.recipeSubject.value;
-        const updateRecipes = currentState.recipes.filter
-        ((item: any) => item.id !== id)
-        this.recipeSubject.next({...currentState, recipes: updateRecipes});
+        const updatedRecipes = currentState.recipes.filter((item:any) => item.id !== id);
+        this.recipeSubject.next({ ...currentState, recipes: updatedRecipes });
       })
     );
   }

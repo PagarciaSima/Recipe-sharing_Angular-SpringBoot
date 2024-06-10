@@ -1,4 +1,4 @@
-<h2 class="text-center pt-5">Update Recipe: 3</h2>
+<h2 class="text-center pt-5">Update Recipe: {{recipeItem.id}}</h2>
 <form (ngSubmit)="onSubmit()" class="w-[27rem] p-6 rounded-lg shadow-md">
     <div class="mb-4">
         <mat-form-field class="w-full">
@@ -37,7 +37,7 @@
 
     <div>      
         <button mat-raised-button color="primary" type="submit">
-            Create
+            Update
         </button>
     </div>
 </form>
